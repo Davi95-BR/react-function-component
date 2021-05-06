@@ -1,19 +1,30 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
+import Checkbox from '@material-ui/core/Checkbox';
 
 function FormularioCadastro() {
     return (
         <form>
-            <TextField variant="outlined"  id="Nome" label="Nome" fullWidth required/>
-            <TextField variant="outlined" id="Sobrenome" label="Sobrenome" fullWidth required/>
-            <TextField variant="outlined" id="CPF" label="CPF" fullWidth required/>
+            <TextField variant="outlined" id="Nome" label="Nome" fullWidth margin="normal" required />
+            <TextField variant="outlined" id="Sobrenome" label="Sobrenome" fullWidth margin="normal" required />
+            <TextField variant="outlined" id="CPF" label="CPF" fullWidth margin="normal" required />
 
             <label>Promoções</label>
-            <input type="checkbox" />
+            <Checkbox
+                defaultChecked
+                color="secundary"
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
+                required
+            />
 
             <label>Novidades</label>
-            <input type="checkbox" />
+            <Checkbox
+                defaultChecked
+                color="secundary"
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
+                required
+            />
 
             <Button
                 type="submit"
@@ -25,5 +36,5 @@ function FormularioCadastro() {
     );
 }
 
-export default FormularioCadastro;
 
+export default FormularioCadastro;

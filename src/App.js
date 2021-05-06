@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import FormularioCadastro from "../src/componente/FormularioCadastro/FormularioCadastro.jsx";
 import "./App.css";
-
+import Container from '@material-ui/core/Container'
 class App extends Component {
   /*constructor() {
     
@@ -11,12 +11,10 @@ class App extends Component {
 
   render() {
     return (
-      <Fragment className="conteudo">
-        <main className="conteudo-principal">
+      <Container component="article" maxWidth="sm">
           <h1>Formulário de cadastro</h1>
           <FormularioCadastro />
-        </main>
-      </Fragment>
+      </Container>
     );
   }
 }
