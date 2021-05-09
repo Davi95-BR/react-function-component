@@ -27,4 +27,6 @@ function validarCPF(cpf){
   }
 }
 
+
+
 export default App;
