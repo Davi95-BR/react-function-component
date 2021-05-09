@@ -3,19 +3,19 @@ import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 
 
 
-function FormularioCadastro() {     // Hooks
+function FormularioCadastro({ aoEnviar, validarCPF }) {     // Hooks
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
-
+    const [erros, setErros] = useState({cpf:{ valido: true, texto: "" }});
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                console.log({ nome, sobrenome, cpf, novidades, promocoes });
+                aoEnviar(nome, sobrenome, cpf, novidades, promocoes);
             }}
         >
             <TextField
@@ -31,20 +31,33 @@ function FormularioCadastro() {     // Hooks
                 }}
                 variant="outlined" id="sobrenome" label="sobrenome" fullWidth margin="normal" required />
             <TextField
-                value={cpf}
-                onChange={(event) => {
-                    setCpf(event.target.value);
-                }}
-                variant="outlined" id="cpf" label="CPF" fullWidth margin="normal" required />
+               value={cpf}
+               onChange={(event) => {
+                 setCpf(event.target.value);
+               }}
+       
+               onBlur={(event)=>{
+                 const ehValido = validarCPF(cpf);
+                 setErros({cpf:ehValido})
+               }}
+               error={!erros.cpf.valido}
+               helperText={erros.cpf.texto}
+               id="CPF"
+               label="CPF"
+               variant="outlined"
+               margin="normal"
+               fullWidth
+               required 
+               />
 
             <FormControlLabel
                 label="novidades"
                 control={<Switch
                     checked={novidades}
-                     onChange={(event) => {
-                    setNovidades(event.target.checked);
-                }}
-                    color="primary" name={'novidades'}/>}
+                    onChange={(event) => {
+                        setNovidades(event.target.checked);
+                    }}
+                    color="primary" name={'novidades'} />}
             />
             <FormControlLabel
                 label="promoções"
@@ -53,7 +66,7 @@ function FormularioCadastro() {     // Hooks
                     onChange={(event) => {
                         setPromocoes(event.target.checked);
                     }}
-                    color="primary" name={'promocoes'}/>}
+                    color="primary" name={'promocoes'} />}
             />
             <Button type="submit" variant="contained">Cadastrar</Button>
         </form>
