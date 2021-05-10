@@ -33,7 +33,7 @@ function FormularioCadastro({ aoEnviar, validarCPF, validarSenha }) {     // Hoo
                     aoEnviar(dados);
                 }}
             >
-                <Typography align="left" variant="h5" component="h1">Informações básicas</Typography>
+                <Typography color="primary" align="left" variant="h5" component="h1">Informações básicas</Typography>
                 <TextField
                     value={nome}
                     onChange={(event) => {
@@ -102,7 +102,7 @@ function FormularioCadastro({ aoEnviar, validarCPF, validarSenha }) {     // Hoo
                         }}
                         color="primary" name={'promocoes'} />}
                 />
-                <Button type="submit" variant="contained">Cadastrar</Button>
+                <Button color="primary" type="submit" variant="contained">Cadastrar</Button>
             </form>
         </Box>
     );
