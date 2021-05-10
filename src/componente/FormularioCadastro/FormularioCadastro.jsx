@@ -2,21 +2,23 @@ import React, { useState } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 
 
-function FormularioCadastro({ aoEnviar, validarCPF }) {     // Hooks
+function FormularioCadastro({ aoEnviar, validarCPF, validarSenha }) {     // Hooks
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
+    const [senha, setSenha] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
-    const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
-    const [senha, setSenha] = useState("");
+    const [errosCpf, setErrosCpf] = useState({ cpf: { valido: true, texto: "" } });
+    const [errosSenha, setErrosSenha] = useState({ senha: { valido: true, texto: "" } });
 
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                aoEnviar(nome, sobrenome, cpf, senha, novidades, promocoes);
+                let dados = [nome, sobrenome, cpf, senha, novidades, promocoes]
+                aoEnviar(dados);
             }}
         >
             <TextField
@@ -36,13 +38,12 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {     // Hooks
                 onChange={(event) => {
                     setCpf(event.target.value);
                 }}
-
                 onBlur={(event) => {
                     const ehValido = validarCPF(cpf);
-                    setErros({ cpf: ehValido })
+                    setErrosCpf({ cpf: ehValido })
                 }}
-                error={!erros.cpf.valido}
-                helperText={erros.cpf.texto}
+                error={!errosCpf.cpf.valido}
+                helperText={errosCpf.cpf.texto}
                 id="CPF"
                 label="CPF"
                 variant="outlined"
@@ -55,6 +56,12 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {     // Hooks
                 onChange={(event) => {
                     setSenha(event.target.value);
                 }}
+                onBlur={(event) => {
+                    const ehValido = validarSenha(senha);
+                    setErrosSenha({ senha:ehValido })
+                }}
+                error={!errosSenha.senha.valido}
+                helperText={errosSenha.senha.texto}
                 id="outlined-basic"
                 label="senha"
                 variant="outlined"
