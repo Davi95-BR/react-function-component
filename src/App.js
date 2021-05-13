@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Container component="article" maxWidth="sm">
           <Typography align="center" variant="h3" component="h1">Formulário de cadastro</Typography>
-          <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} validarSenha={validarSenha} />
+          <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} validarSenha={validarSenha}/>
       </Container>
     );
   }
@@ -34,7 +34,5 @@ function validarSenha(senha){
     return { valido: true, texto: "" }
   }
 }
-
-
 
 export default App;
