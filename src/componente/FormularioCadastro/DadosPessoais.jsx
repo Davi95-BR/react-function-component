@@ -3,16 +3,14 @@ import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 
-function DadosPessoais({ aoEnviar, validarCPF, validarSenha }) {     // Hooks
+function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
-    const [senha, setSenha] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
     const [errosCpf, setErrosCpf] = useState({ cpf: { valido: true, texto: "" } });
-    const [errosSenha, setErrosSenha] = useState({ senha: { valido: true, texto: "" } });
-
+    
     return (
 
         <Box
@@ -25,7 +23,7 @@ function DadosPessoais({ aoEnviar, validarCPF, validarSenha }) {     // Hooks
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    let dados = [nome, sobrenome, cpf, senha, novidades, promocoes]
+                    let dados = [nome, sobrenome, cpf, novidades, promocoes]
                     aoEnviar(dados);
                 }}
             >
@@ -58,25 +56,6 @@ function DadosPessoais({ aoEnviar, validarCPF, validarSenha }) {     // Hooks
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    required
-                />
-                <TextField
-                    value={senha}
-                    onChange={(event) => {
-                        setSenha(event.target.value);
-                    }}
-                    onBlur={(event) => {
-                        const ehValido = validarSenha(senha);
-                        setErrosSenha({ senha: ehValido })
-                    }}
-                    error={!errosSenha.senha.valido}
-                    helperText={errosSenha.senha.texto}
-                    id="outlined-basic"
-                    label="senha"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    type="password"
                     required
                 />
                 
