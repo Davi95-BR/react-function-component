@@ -3,20 +3,20 @@ import FormularioCadastro from "../src/componente/FormularioCadastro/FormularioC
 import "./App.css";
 import {Container, Typography} from '@material-ui/core'
 import 'fontsource-roboto';
-import { makeStyles } from '@material-ui/core/styles';
+
 class App extends Component {
 
   render() {
     return (
       <Container component="article" maxWidth="sm">
           <Typography align="center" variant="h3" component="h1">Formulário de cadastro</Typography>
-          <FormularioCadastro aoEnviar={aoEnviar} validarCPF={validarCPF} validarSenha={validarSenha} validarEmail={validarEmail} useStyles ={makeStyles}/>
+          <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} validarSenha={validarSenha} validarEmail={validarEmail}/>
       </Container>
     );
   }
 }
 
-function aoEnviar(dados){
+function aoEnviarForm(dados){
   console.log(dados);
 }
 
@@ -37,7 +37,7 @@ function validarSenha(senha){
 }
 
 function validarEmail(email) {
-  if(email.length !== 27){
+  if(email.length !== 28){
     return { valido:false, texto: "email deve ter 27 dígitos." }
   }else{
     return { valido: true, texto: "" }

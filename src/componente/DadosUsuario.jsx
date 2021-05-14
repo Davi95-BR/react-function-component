@@ -3,16 +3,19 @@ import React, { useState } from 'react';
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
-function DadosUsuario({ aoEnviar, validarSenha, validarEmail }) {
+
+
+function DadosUsuario({ aoEnviar, validarSenha, validarEmail}) {
 
     const [senha, setSenha] = useState("");
     const [errosSenha, setErrosSenha] = useState({ senha: { valido: true, texto: "" } });
     const [email, setEmail] = useState("");
     const [errosEmail, setErrosEmail] = useState({ email: { valido: true, texto: "" } });
-
-
+    
     return (
-        <Box
+
+        <Box 
+
             border={1}
             borderColor="primary.main"
             borderRadius={16}
@@ -22,8 +25,7 @@ function DadosUsuario({ aoEnviar, validarSenha, validarEmail }) {
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    let dados = [senha, email]
-                    aoEnviar(dados);
+                    aoEnviar();
                 }}
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Dados do Usuário</Typography>
@@ -40,6 +42,7 @@ function DadosUsuario({ aoEnviar, validarSenha, validarEmail }) {
                     helperText={errosEmail.email.texto}
                     label="email" type="email" id="email" variant="outlined" margin="normal" fullWidth required
                 />
+
                 <TextField
                     value={senha}
                     onChange={(event) => {

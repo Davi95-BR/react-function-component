@@ -50,8 +50,7 @@ function DadosEntrega({ aoEnviar, }) {
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    let dados = [cep, numero, endereco, cidade, estado]
-                    aoEnviar(dados);
+                    aoEnviar();
                 }}
                 className={classes.root}
                  noValidate autoComplete="off"
@@ -62,6 +61,9 @@ function DadosEntrega({ aoEnviar, }) {
                     onChange={(event) => {
                         setCep(event.target.value);
                     }}
+                    SelectProps={{
+                        native: true,
+                    }}
                     label="CEP" type="number" id="cep" variant="outlined" margin="normal" fullWidth required
                 />
 
@@ -70,7 +72,10 @@ function DadosEntrega({ aoEnviar, }) {
                     onChange={(event) => {
                         setEndereco(event.target.value);
                     }}
-                    label="endereco" type="text" id="edereco" variant="outlined" margin="normal" fullWidth required
+                    SelectProps={{
+                        native: true,
+                    }}
+                    label="endereço" type="text" id="endereco" variant="outlined" margin="normal" fullWidth required
                 />
 
                 <TextField
@@ -78,7 +83,10 @@ function DadosEntrega({ aoEnviar, }) {
                     onChange={(event) => {
                         setNumero(event.target.value);
                     }}
-                    label="numero" type="number" id="numero" variant="outlined" margin="normal" fullWidth required
+                    SelectProps={{
+                        native: true,
+                    }}
+                    label="número" type="number" id="numero" variant="outlined" margin="normal" required
                 />
 
                 <TextField
@@ -86,7 +94,10 @@ function DadosEntrega({ aoEnviar, }) {
                     onChange={(event) => {
                         setCidade(event.target.value);
                     }}
-                    label="cidade" type="text" id="cidade" variant="outlined" margin="normal" fullWidth required
+                    SelectProps={{
+                        native: true,
+                    }}
+                    label="cidade" type="text" id="cidade" variant="outlined" margin="normal" placeholder="Digite sua cidade natal" required
                 />
 
                 <TextField
@@ -114,7 +125,7 @@ function DadosEntrega({ aoEnviar, }) {
                 </TextField>
 
 
-                <Button color="primary" type="submit" variant="contained">Cadastrar</Button>
+                <Button color="primary" type="submit" variant="contained" fullWidth > Finalizar Cadastro</Button>
             </form>
         </Box>
     );

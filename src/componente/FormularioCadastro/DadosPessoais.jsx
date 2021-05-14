@@ -23,8 +23,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    let dados = [nome, sobrenome, cpf, novidades, promocoes]
-                    aoEnviar(dados);
+                    aoEnviar();
                 }}
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Informações básicas</Typography>
