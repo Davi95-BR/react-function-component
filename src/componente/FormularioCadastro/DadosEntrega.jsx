@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles';
 
 
-function DadosEntrega({ aoEnviar, }) {
+function DadosEntrega({ aoEnviar}) {
 
     const [cep, setCep] = useState("");
     const [endereco, setEndereco] = useState("");

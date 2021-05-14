@@ -18,7 +18,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
             borderColor="primary.main"
             borderRadius={16}
             p={2} pt={2} pb={2} mt={2.5}
-
+            
         >
             <form
                 onSubmit={(event) => {
