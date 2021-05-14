@@ -39,7 +39,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
                     onChange={(event) => {
                         setSobrenome(event.target.value);
                     }}
-                    variant="outlined" id="sobrenome" label="sobrenome" fullWidth margin="normal" required />
+                    variant="outlined" id="sobrenome" label="sobrenome"  fullWidth margin="normal" required />
                 <TextField
                     value={cpf}
                     onChange={(event) => {
@@ -53,6 +53,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
                     helperText={errosCpf.cpf.texto}
                     id="CPF"
                     label="CPF"
+                    type="number"
                     variant="outlined"
                     margin="normal"
                     fullWidth

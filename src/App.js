@@ -3,13 +3,14 @@ import FormularioCadastro from "../src/componente/FormularioCadastro/FormularioC
 import "./App.css";
 import {Container, Typography} from '@material-ui/core'
 import 'fontsource-roboto';
+import { makeStyles } from '@material-ui/core/styles';
 class App extends Component {
 
   render() {
     return (
       <Container component="article" maxWidth="sm">
           <Typography align="center" variant="h3" component="h1">Formulário de cadastro</Typography>
-          <FormularioCadastro aoEnviar={aoEnviar} validarCPF={validarCPF} validarSenha={validarSenha} validarEmail={validarEmail}/>
+          <FormularioCadastro aoEnviar={aoEnviar} validarCPF={validarCPF} validarSenha={validarSenha} validarEmail={validarEmail} useStyles ={makeStyles}/>
       </Container>
     );
   }
@@ -42,5 +43,6 @@ function validarEmail(email) {
     return { valido: true, texto: "" }
   }
 }
+
 
 export default App;
