@@ -23,18 +23,12 @@ function DadosEntrega({ aoEnviar, }) {
       }));
     
     const estados = [
-        {value: 'SP', label: 'SP',}, {value: 'RJ', label: 'RJ',},
-        {value: 'AC', label: 'AC',}, {value: 'AL', label: 'AL',},
-        {value: 'AP', label: 'AP',}, {value: 'AM', label: 'AM',},
-        {value: 'BA', label: 'BA',}, {value: 'CE', label: 'CE',},
-        {value: 'DF', label: 'DF',}, {value: 'ES', label: 'ES',},
-        {value: 'GO', label: 'GO',}, {value: 'MA', label: 'MA',},
-        {value: 'MT', label: 'MT',}, {value: 'MS', label: 'MS',},
-        {value: 'MG', label: 'MG',}, {value: 'PA', label: 'PA',},
-        {value: 'PB', label: 'PB', },{value: 'PR', label: 'PR',},
-        {value: 'PE', label: 'PE',}, {value: 'PI', label: 'PI',},
-        {value: 'RR', label: 'RR',}, {value: 'RO', label: 'RO',},
-        {value: 'RN', label: 'RN',}, {value: 'RS', label: 'RS',},
+        {value: 'SP', label: 'SP',}, {value: 'RJ', label: 'RJ',}, {value: 'AC', label: 'AC',}, {value: 'AL', label: 'AL',},
+        {value: 'AP', label: 'AP',}, {value: 'AM', label: 'AM',}, {value: 'BA', label: 'BA',}, {value: 'CE', label: 'CE',},
+        {value: 'DF', label: 'DF',}, {value: 'ES', label: 'ES',}, {value: 'GO', label: 'GO',}, {value: 'MA', label: 'MA',},
+        {value: 'MT', label: 'MT',}, {value: 'MS', label: 'MS',}, {value: 'MG', label: 'MG',}, {value: 'PA', label: 'PA',},
+        {value: 'PB', label: 'PB', },{value: 'PR', label: 'PR',}, {value: 'PE', label: 'PE',}, {value: 'PI', label: 'PI',},
+        {value: 'RR', label: 'RR',}, {value: 'RO', label: 'RO',}, {value: 'RN', label: 'RN',}, {value: 'RS', label: 'RS',},
         {value: 'SC', label: 'SC',}, {value: 'SE', label: 'SE',}, {value: 'TO', label: 'TO',},
       ];
      
@@ -50,7 +44,7 @@ function DadosEntrega({ aoEnviar, }) {
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    aoEnviar();
+                    aoEnviar({cep, endereco, numero, cidade, estado});
                 }}
                 className={classes.root}
                  noValidate autoComplete="off"
@@ -61,9 +55,7 @@ function DadosEntrega({ aoEnviar, }) {
                     onChange={(event) => {
                         setCep(event.target.value);
                     }}
-                    SelectProps={{
-                        native: true,
-                    }}
+
                     label="CEP" type="number" id="cep" variant="outlined" margin="normal" fullWidth required
                 />
 

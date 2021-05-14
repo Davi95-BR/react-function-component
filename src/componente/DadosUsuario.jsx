@@ -25,7 +25,7 @@ function DadosUsuario({ aoEnviar, validarSenha, validarEmail}) {
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    aoEnviar();
+                    aoEnviar({senha, email});
                 }}
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Dados do Usuário</Typography>

@@ -23,7 +23,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    aoEnviar();
+                    aoEnviar({nome, sobrenome, cpf, novidades, promocoes});
                 }}
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Informações básicas</Typography>
@@ -60,6 +60,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
                 />
                 
                 <FormControlLabel
+                value={novidades}
                     label="novidades"
                     control={<Switch
                         checked={novidades}
@@ -69,6 +70,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
                         color="primary" name={'novidades'} />}
                 />
                 <FormControlLabel
+                value={promocoes}
                     label="promoções"
                     control={<Switch
                         checked={promocoes}
