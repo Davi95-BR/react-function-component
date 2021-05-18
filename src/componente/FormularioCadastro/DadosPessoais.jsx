@@ -9,14 +9,25 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
-    const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
+    const [erros, setErros] = useState({
+         cpf: { valido: true, texto: "" },
+         nome: { valido: true, texto: "" }
+         });
 
     function validarCampos(event){
 
         const {name, value} = event.target;
-        const ehValido = validacoes[name](value);
-        const novoEstado = {...erros, name: ehValido}
+        const novoEstado = {...erros}
+        novoEstado[name] = validacoes[name](value)
         setErros(novoEstado);
+    }
+
+    function possoEnviar(){
+        
+        for(let campo in erros){
+            if(!erros[campo].valido){ return false }
+        }
+        return true;
     }
     
     return (
@@ -31,7 +42,7 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    aoEnviar({nome, sobrenome, cpf, novidades, promocoes});
+                    if(possoEnviar()){ aoEnviar({nome, sobrenome, cpf, novidades, promocoes}); }
                 }}
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Informações básicas</Typography>
@@ -40,21 +51,24 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
                     onChange={(event) => {
                         setNome(event.target.value);
                     }}
-                    variant="outlined" id="nome" label="nome" fullWidth margin="normal" required />
+                    onBlur={validarCampos}
+                    error={!erros.nome.valido}
+                    helperText={erros.nome.texto}
+                    variant="outlined" name="nome" id="nome" label="nome" fullWidth margin="normal" required />
                 <TextField
                     value={sobrenome}
                     onChange={(event) => {
                         setSobrenome(event.target.value);
                     }}
-                    variant="outlined" id="sobrenome" label="sobrenome"  fullWidth margin="normal" required />
+                    variant="outlined" id="sobrenome" name="sobrenome" label="sobrenome"  fullWidth margin="normal" required />
                 <TextField
                     value={cpf}
                     onChange={(event) => {
                         setCpf(event.target.value);
                     }}
                     onBlur={validarCampos}
-                    error={!errosCpf.cpf.valido}
-                    helperText={errosCpf.cpf.texto}
+                    error={!erros.cpf.valido}
+                    helperText={erros.cpf.texto}
                     id="CPF"
                     label="CPF"
                     type="number"
@@ -68,6 +82,7 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
                 <FormControlLabel
                 value={novidades}
                     label="novidades"
+                    name="novidades"
                     control={<Switch
                         checked={novidades}
                         onChange={(event) => {
@@ -78,6 +93,7 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
                 <FormControlLabel
                 value={promocoes}
                     label="promoções"
+                    name="promocoes"
                     control={<Switch
                         checked={promocoes}
                         onChange={(event) => {
@@ -85,7 +101,7 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
                         }}
                         color="primary" name={'promocoes'} />}
                 />
-                <Button color="primary" type="submit" variant="contained">Cadastrar</Button>
+                <Button color="primary" type="submit" variant="contained">Próximo</Button>
             </form>
         </Box>
     );

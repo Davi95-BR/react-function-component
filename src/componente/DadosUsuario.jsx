@@ -3,14 +3,32 @@ import React, { useState } from 'react';
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
-
-
-function DadosUsuario({ aoEnviar, validarSenha, validarEmail}) {
+function DadosUsuario({ aoEnviar, validacoes}) {
 
     const [senha, setSenha] = useState("");
-    const [errosSenha, setErrosSenha] = useState({ senha: { valido: true, texto: "" } });
     const [email, setEmail] = useState("");
-    const [errosEmail, setErrosEmail] = useState({ email: { valido: true, texto: "" } });
+    const [erros, setErros] = useState({
+        email: { valido: true, texto: "" },
+        senha: { valido: true, texto: "" }
+    });
+    
+
+    function validarCampos(event){
+
+        const {name, value} = event.target;
+        const novoEstado = {...erros}
+        novoEstado[name] = validacoes[name](value)
+        setErros(novoEstado);
+    }
+
+    function possoEnviar(){
+        
+        for(let campo in erros){
+            if(!erros[campo].valido){ return false }
+        }
+        return true;
+    }
+    
     
     return (
 
@@ -25,7 +43,9 @@ function DadosUsuario({ aoEnviar, validarSenha, validarEmail}) {
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    aoEnviar({senha, email});
+                    if(possoEnviar()){
+                        aoEnviar({senha, email});
+                    }
                 }}
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Dados do Usuário</Typography>
@@ -34,13 +54,10 @@ function DadosUsuario({ aoEnviar, validarSenha, validarEmail}) {
                     onChange={(event) => {
                         setEmail(event.target.value);
                     }}
-                    onBlur={(event) => {
-                        const ehValido = validarEmail(email);
-                        setErrosEmail({ email: ehValido });
-                    }}
-                    error={!errosEmail.email.valido}
-                    helperText={errosEmail.email.texto}
-                    label="email" type="email" id="email" variant="outlined" margin="normal" fullWidth required
+                    onBlur={validarCampos}
+                    error={!erros.email.valido}
+                    helperText={erros.email.texto}
+                    label="email" type="email" id="email" name="email" variant="outlined" margin="normal" fullWidth required
                 />
 
                 <TextField
@@ -48,15 +65,12 @@ function DadosUsuario({ aoEnviar, validarSenha, validarEmail}) {
                     onChange={(event) => {
                         setSenha(event.target.value);
                     }}
-                    onBlur={(event) => {
-                        const ehValido = validarSenha(senha);
-                        setErrosSenha({ senha: ehValido })
-                    }}
-                    error={!errosSenha.senha.valido}
-                    helperText={errosSenha.senha.texto}
-                    id="senha" label="senha" type="password" variant="outlined" margin="normal" fullWidth required
+                    onBlur={validarCampos}
+                    error={!erros.senha.valido}
+                    helperText={erros.senha.texto}
+                    id="senha" label="senha" type="password" name="senha" variant="outlined" margin="normal" fullWidth required
                 />
-                <Button color="primary" type="submit" variant="contained">Cadastrar</Button>
+                <Button color="primary" type="submit" variant="contained">Próximo</Button>
             </form>
         </Box>
     );

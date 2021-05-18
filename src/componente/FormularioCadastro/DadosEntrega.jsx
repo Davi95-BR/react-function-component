@@ -55,7 +55,6 @@ function DadosEntrega({ aoEnviar}) {
                     onChange={(event) => {
                         setCep(event.target.value);
                     }}
-
                     label="CEP" type="number" id="cep" variant="outlined" margin="normal" fullWidth required
                 />
 
@@ -100,15 +99,11 @@ function DadosEntrega({ aoEnviar}) {
                     onChange={(event) => {
                         setEstado(event.target.value);
                     }}
-                    SelectProps={{
-                        native: true,
-                    }}
                     variant="outlined"
                     fullWidth
                     margin="normal"
                     required
                 >
-                
                 {estados.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.label}
@@ -117,7 +112,7 @@ function DadosEntrega({ aoEnviar}) {
                 </TextField>
 
 
-                <Button color="primary" type="submit" variant="contained" fullWidth > Finalizar Cadastro</Button>
+                <Button color="primary" type="submit" variant="contained" fullWidth >Finalizar Cadastro</Button>
             </form>
         </Box>
     );
