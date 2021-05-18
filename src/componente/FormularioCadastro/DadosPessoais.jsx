@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
+import ValidacoesCadastro from '../../contexts/validacoesCadastro';
 
-function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
+function DadosPessoais({ aoEnviar}) {     // Hooks
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
@@ -13,7 +14,9 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
          cpf: { valido: true, texto: "" },
          nome: { valido: true, texto: "" }
          });
+    const validacoes = useContext(ValidacoesCadastro);
 
+    
     function validarCampos(event){
 
         const {name, value} = event.target;
@@ -32,13 +35,7 @@ function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
     
     return (
 
-        <Box
-            border={1}
-            borderColor="primary.main"
-            borderRadius={16}
-            p={2} pt={2} pb={2} mt={2.5}
-            
-        >
+        <Box border={1} borderColor="primary.main" borderRadius={16} p={2} pt={2} pb={2} mt={2.5}>
             <form
                 onSubmit={(event) => {
                     event.preventDefault();

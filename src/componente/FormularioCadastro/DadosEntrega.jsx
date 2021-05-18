@@ -34,13 +34,7 @@ function DadosEntrega({ aoEnviar}) {
      
 
     return (
-        <Box
-            border={1}
-            borderColor="primary.main"
-            borderRadius={16}
-            p={2} pt={2} pb={2} mt={2.5}
-
-        >
+        <Box border={1} borderColor="primary.main" borderRadius={16} p={2} pt={2} pb={2} mt={2.5}>
             <form
                 onSubmit={(event) => {
                     event.preventDefault();

@@ -1,9 +1,10 @@
 import { TextField, Button } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
+import ValidacoesCadastro from '../contexts/validacoesCadastro';
 
-function DadosUsuario({ aoEnviar, validacoes}) {
+function DadosUsuario({ aoEnviar}) {
 
     const [senha, setSenha] = useState("");
     const [email, setEmail] = useState("");
@@ -11,40 +12,34 @@ function DadosUsuario({ aoEnviar, validacoes}) {
         email: { valido: true, texto: "" },
         senha: { valido: true, texto: "" }
     });
-    
 
-    function validarCampos(event){
+    const validacoes = useContext(ValidacoesCadastro);
 
-        const {name, value} = event.target;
-        const novoEstado = {...erros}
+    function validarCampos(event) {
+
+        const { name, value } = event.target;
+        const novoEstado = { ...erros }
         novoEstado[name] = validacoes[name](value)
         setErros(novoEstado);
     }
 
-    function possoEnviar(){
-        
-        for(let campo in erros){
-            if(!erros[campo].valido){ return false }
+    function possoEnviar() {
+
+        for (let campo in erros) {
+            if (!erros[campo].valido) { return false }
         }
         return true;
     }
-    
-    
+
+
     return (
 
-        <Box 
-
-            border={1}
-            borderColor="primary.main"
-            borderRadius={16}
-            p={2} pt={2} pb={2} mt={2.5}
-
-        >
+        <Box border={1} borderColor="primary.main" borderRadius={16} p={2} pt={2} pb={2} mt={2.5}>
             <form
                 onSubmit={(event) => {
                     event.preventDefault();
-                    if(possoEnviar()){
-                        aoEnviar({senha, email});
+                    if (possoEnviar()) {
+                        aoEnviar({ senha, email });
                     }
                 }}
             >
