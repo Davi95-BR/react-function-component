@@ -3,13 +3,21 @@ import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 
-function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
+function DadosPessoais({ aoEnviar, validacoes}) {     // Hooks
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
-    const [errosCpf, setErrosCpf] = useState({ cpf: { valido: true, texto: "" } });
+    const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
+
+    function validarCampos(event){
+
+        const {name, value} = event.target;
+        const ehValido = validacoes[name](value);
+        const novoEstado = {...erros, name: ehValido}
+        setErros(novoEstado);
+    }
     
     return (
 
@@ -44,10 +52,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
                     onChange={(event) => {
                         setCpf(event.target.value);
                     }}
-                    onBlur={(event) => {
-                        const ehValido = validarCPF(cpf);
-                        setErrosCpf({ cpf: ehValido })
-                    }}
+                    onBlur={validarCampos}
                     error={!errosCpf.cpf.valido}
                     helperText={errosCpf.cpf.texto}
                     id="CPF"
@@ -55,6 +60,7 @@ function DadosPessoais({ aoEnviar, validarCPF}) {     // Hooks
                     type="number"
                     variant="outlined"
                     margin="normal"
+                    name="cpf"
                     fullWidth
                     required
                 />

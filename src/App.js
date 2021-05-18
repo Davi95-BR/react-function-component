@@ -3,14 +3,14 @@ import FormularioCadastro from "../src/componente/FormularioCadastro/FormularioC
 import "./App.css";
 import {Container, Typography} from '@material-ui/core'
 import 'fontsource-roboto';
-
+import {validarCPF, validarEmail, validarSenha} from './models/cadastro/cadastro'
 class App extends Component {
 
   render() {
     return (
       <Container component="article" maxWidth="sm">
           <Typography align="center" variant="h3" component="h1">Formulário de cadastro</Typography>
-          <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} validarSenha={validarSenha} validarEmail={validarEmail}/>
+          <FormularioCadastro aoEnviar={aoEnviarForm} validacoes={{cpf: validarCPF, senha: validarSenha, email: validarEmail}}/>
       </Container>
     );
   }
@@ -18,30 +18,6 @@ class App extends Component {
 
 function aoEnviarForm(dados){
   console.log(dados);
-}
-
-function validarCPF(cpf){
-  if(cpf.length !== 11){
-    return {valido:false, texto:"CPF deve ter 11 digitos."}
-  }else{
-    return {valido:true, texto:""}
-  }
-}
-
-function validarSenha(senha){
-  if(senha.length !== 8){
-    return { valido:false, texto: "senha deve ter 8 dígitos." }
-  }else{
-    return { valido: true, texto: "" }
-  }
-}
-
-function validarEmail(email) {
-  if(email.length !== 28){
-    return { valido:false, texto: "email deve ter 27 dígitos." }
-  }else{
-    return { valido: true, texto: "" }
-  }
 }
 
 
