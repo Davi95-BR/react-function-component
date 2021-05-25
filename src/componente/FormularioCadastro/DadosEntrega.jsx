@@ -88,7 +88,7 @@ function DadosEntrega({ aoEnviar}) {
                 <TextField
                     value={estado}
                     id="estado"
-                    select
+                    select = "value"
                     label="estado"
                     onChange={(event) => {
                         setEstado(event.target.value);

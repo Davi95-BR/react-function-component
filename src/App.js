@@ -3,6 +3,7 @@ import FormularioCadastro from "../src/componente/FormularioCadastro/FormularioC
 import "./App.css";
 import {Container, Typography} from '@material-ui/core'
 import 'fontsource-roboto';
+
 import {validarCPF, validarEmail, validarNome, validarSenha} from './models/cadastro/cadastro.js'
 import ValidacoesCadastro from "./contexts/validacoesCadastro.js";
 class App extends Component {
@@ -17,7 +18,6 @@ class App extends Component {
           
           <FormularioCadastro aoEnviar={aoEnviarForm}/>
           </ValidacoesCadastro.Provider>
-          
       </Container>
     );
   }

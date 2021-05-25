@@ -3,6 +3,7 @@ import { Button, TextField, Switch, FormControlLabel } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography'
 import ValidacoesCadastro from '../../contexts/validacoesCadastro';
+import useErros from '../../hooks/useErros';
 
 function DadosPessoais({ aoEnviar}) {     // Hooks
     const [nome, setNome] = useState("");
@@ -10,28 +11,10 @@ function DadosPessoais({ aoEnviar}) {     // Hooks
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
-    const [erros, setErros] = useState({
-         cpf: { valido: true, texto: "" },
-         nome: { valido: true, texto: "" }
-         });
     const validacoes = useContext(ValidacoesCadastro);
+    const [erros, validarCampos, possoEnviar] = useErros(validacoes);
 
     
-    function validarCampos(event){
-
-        const {name, value} = event.target;
-        const novoEstado = {...erros}
-        novoEstado[name] = validacoes[name](value)
-        setErros(novoEstado);
-    }
-
-    function possoEnviar(){
-        
-        for(let campo in erros){
-            if(!erros[campo].valido){ return false }
-        }
-        return true;
-    }
     
     return (
 
