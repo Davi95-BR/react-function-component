@@ -1,8 +1,10 @@
 import { TextField, Button } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles';
+import ValidacoesCadastro from '../../contexts/validacoesCadastro';
+import useErros from '../../hooks/useErros';
 
 
 function DadosEntrega({ aoEnviar}) {
@@ -12,6 +14,8 @@ function DadosEntrega({ aoEnviar}) {
     const [numero, setNumero] = useState("");
     const [cidade, setCidade] = useState("");
     const [estado, setEstado] = useState("");
+    const validacoes = useContext(ValidacoesCadastro);
+    const [erros, validarCampos, possoEnviar] = useErros(validacoes);
 
     const classes = makeStyles((theme) => ({
         root: {
@@ -21,6 +25,7 @@ function DadosEntrega({ aoEnviar}) {
           },
         },
       }));
+      
     
     const estados = [
         {value: 'SP', label: 'SP',}, {value: 'RJ', label: 'RJ',}, {value: 'AC', label: 'AC',}, {value: 'AL', label: 'AL',},
@@ -36,12 +41,15 @@ function DadosEntrega({ aoEnviar}) {
     return (
         <Box border={1} borderColor="primary.main" borderRadius={16} p={2} pt={2} pb={2} mt={2.5}>
             <form
-                onSubmit={(event) => {
-                    event.preventDefault();
+            onSubmit={(event) => {
+                event.preventDefault();
+                if (possoEnviar()) {
                     aoEnviar({cep, endereco, numero, cidade, estado});
-                }}
-                className={classes.root}
-                 noValidate autoComplete="off"
+                }
+            }}
+               
+            className={classes.root}
+            noValidate autoComplete="off"
             >
                 <Typography color="primary" align="left" variant="h5" component="h1">Dados de entrega</Typography>
                 <TextField
@@ -49,7 +57,10 @@ function DadosEntrega({ aoEnviar}) {
                     onChange={(event) => {
                         setCep(event.target.value);
                     }}
-                    label="CEP" type="number" id="cep" variant="outlined" margin="normal" fullWidth required
+                    onBlur={validarCampos}
+                    error={!erros.cep.valido}
+                    helperText={erros.cep.texto}
+                    label="CEP" type="number" id="cep" name="cep" variant="outlined" margin="normal" placeholder="00000-000" fullWidth required
                 />
 
                 <TextField

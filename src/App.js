@@ -3,8 +3,7 @@ import FormularioCadastro from "../src/componente/FormularioCadastro/FormularioC
 import "./App.css";
 import {Container, Typography} from '@material-ui/core'
 import 'fontsource-roboto';
-
-import {validarCPF, validarEmail, validarNome, validarSenha} from './models/cadastro/cadastro.js'
+import {validarCPF, validarEmail, validarNome, validarSenha, validarCEP} from './models/cadastro/cadastro.js'
 import ValidacoesCadastro from "./contexts/validacoesCadastro.js";
 class App extends Component {
 
@@ -13,7 +12,7 @@ class App extends Component {
       <Container component="article" maxWidth="sm">
           <Typography align="center" variant="h3" component="h1">Formulário de cadastro</Typography>
           <ValidacoesCadastro.Provider
-           value={{cpf: validarCPF, senha: validarSenha, email: validarEmail, nome: validarNome}}
+           value={{cpf: validarCPF, senha: validarSenha, email: validarEmail, nome: validarNome, cep: validarCEP,}}
            >
           
           <FormularioCadastro aoEnviar={aoEnviarForm}/>

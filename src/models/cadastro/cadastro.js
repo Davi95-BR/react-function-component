@@ -29,4 +29,16 @@ function validarNome(nome) {
     return { valido: true, texto: "" };
   }
 }
-export { validarCPF, validarEmail, validarSenha, validarNome };
+
+
+function validarCEP(cep) {
+  var cepValido = /(^\d{5}[-]?\d{3}$)/;
+  if(!cepValido.test(cep)) {
+    return { valido: false, texto: "CEP não é válido, deve conter 8 números"
+    }
+  } else {
+    return { valido: true, texto: "", }
+  }
+}
+
+export { validarCPF, validarEmail, validarSenha, validarNome, validarCEP };
