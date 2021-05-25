@@ -15,10 +15,12 @@ function validarSenha(senha) {
 }
 
 function validarEmail(email) {
-  if (email.length !== 28) {
-    return { valido: false, texto: "email deve ter 27 dígitos." };
+  var emailValido = /(^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$)/;
+  if(!emailValido.test(email)) {
+    return { valido: false, texto: "Email não é válido"
+    }
   } else {
-    return { valido: true, texto: "" };
+    return { valido: true, texto: "", }
   }
 }
 
